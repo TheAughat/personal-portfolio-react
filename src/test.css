@@ -1,0 +1,17 @@
+.sections {
+    /* max-width: 70vw; */
+    font-size: 2em;
+}
+
+#section-1 {
+    color: rgb(201, 44, 44);
+}
+#section-2 {
+    color: rgb(58, 179, 58);
+}
+#section-3 {
+    color: rgb(77, 77, 218);
+}
+#section-4 {
+    color: rgb(153, 153, 0);
+}
