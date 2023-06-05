@@ -3,7 +3,7 @@ import React from "react";
 import UtilityButton from "../buttons/UtilityButton";
 import { defaultTheme } from "../../utils/Theme";
 import myCV from '../../utils/documents/DanielCV.pdf';
-import kesterRef from '../../utils/documents/icis_reference.pdf';
+import kesterRef from '../../utils/documents/DanielICISReference.pdf';
 import { DataGrid } from '@mui/x-data-grid';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Type } from "./About";
@@ -75,10 +75,32 @@ function Resume() {
     }
 
 
+    const handleDownload = file => {
+        let urlBreakdown = file.split('/');
+        urlBreakdown = urlBreakdown[urlBreakdown.length - 1].split('.');
+        const filename = urlBreakdown[0] + '.' + urlBreakdown[2];
+        let link = document.createElement('a');
+        link.href = file;
+        link.download = filename;
+        link.dispatchEvent(new MouseEvent('click'));
+    };
+
+
     function renderResume() {
         return (
             <object data={myCV} type='application/pdf' style={embedSx}>
-                <Type>No online PDF viewer available.</Type>
+                <Type>
+                    No online PDF viewer available. You may 
+                    <Box component='span' mx={0.5}>
+                        <UtilityButton 
+                            styleType='classic' 
+                            onClick={() => handleDownload(myCV)}
+                        >
+                            Download
+                        </UtilityButton>
+                    </Box>
+                    the pdf instead.
+                </Type>
             </object>
             // <iframe src={myCV} style={embedSx}/>
         );
@@ -90,11 +112,9 @@ function Resume() {
             <>
                 <Stack alignItems='flex-start'>
                     <Button 
-                        // color='primary'
                         sx={{color: defaultTheme.palette.primary.dark}}
                         startIcon={<ChevronLeftIcon/>}
                         onClick={() => setViewing('resume')}
-                        // variant='outlined'
                     >
                         Back to Resume
                     </Button>
@@ -138,7 +158,18 @@ function Resume() {
                     </Button>
                 </Stack>
                 <object data={doc} type='application/pdf' style={embedSx}>
-                    <Type>No online PDF viewer available.</Type>
+                    <Type>
+                        No online PDF viewer available. You may 
+                        <Box component='span' mx={0.5}>
+                            <UtilityButton 
+                                styleType='classic' 
+                                onClick={() => handleDownload(doc)}
+                            >
+                                Download
+                            </UtilityButton>
+                        </Box>
+                        the pdf instead.
+                    </Type>
                 </object>
             </>
         );
